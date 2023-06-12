@@ -31,24 +31,20 @@ const soundHandler = (key) => {
 
 // Animation generation handler
 const animationHandler = (key) => {
-    let activeButton = document.querySelector("." + key);
-    activeButton.classList.add("pressed");
-    setTimeout(() => { activeButton.classList.remove("pressed") }, 100);
+    let activeButton = $(`.${key}`);
+    activeButton.addClass("pressed");
+    setTimeout(() => { activeButton.removeClass("pressed") }, 100);
 }
 
 
 // Website button click event listeners
-document.querySelectorAll(".drum")
-    .forEach(button => {
-        button.addEventListener("click", (event) => {
-            soundHandler(event.target.innerHTML);
-            animationHandler(event.target.innerHTML);
-        });
-    });
-
+$(".drum").on("click", (event) => {
+    soundHandler(event.target.innerHTML);
+    animationHandler(event.target.innerHTML);
+});
 
 // Keyboard button event listener
-document.addEventListener("keydown", (event) => {
+$(document).on("keydown", (event) => {
     soundHandler(event.key);
     animationHandler(event.key);
 });
